@@ -1,17 +1,16 @@
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.JPanel; //Importieren
 
-public class JPanelMandelbrot extends JFrame { // Ac 04-2018
+public class JPanelMandelbrot extends JFrame { // 
 	public static void main(String[] args) {
 		new JPanelMandelbrot();
 	}
 
 	static int imageBreite = 459;
-	static int imageHoehe = 405;
+	static int imageHoehe = 405;// Höhe und Breite definieren
 	int frameBreite = imageBreite + 30, frameHoehe = imageHoehe + 50;
 	Leinwand malPanel = new Leinwand(imageBreite, imageHoehe);
 	JPanel contentPane;
@@ -31,12 +30,12 @@ public class JPanelMandelbrot extends JFrame { // Ac 04-2018
 
 class Leinwand extends JPanel {
 	public Leinwand(int imageBreite, int imageHoehe) {
-		setBackground(Color.WHITE);
+		setBackground(Color.white);
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		long zeit = System.currentTimeMillis();
+		long zeit = System.currentTimeMillis(); 
 		Mandelbrot.zeichneMandelbrotmenge(g, JPanelMandelbrot.imageBreite, JPanelMandelbrot.imageHoehe);
 		System.out.println("benötigte Zeit = " + (System.currentTimeMillis() - zeit) + " ms");
 	}
@@ -59,7 +58,7 @@ class Mandelbrot { // statische Klasse
 		double xa = -2.02, xe = 0.7, ya = -1.2, ye = 1.2; // Ratio 17:15
 		final double dx = (xe - xa) / (imageBreite - 1), dy = (ye - ya) / (imageHoehe - 1);
 		double cx, cy;
-		int maxIt = 500;
+		int maxIt = 20;
 		g.setColor(Color.BLACK);
 		for (int sp = 0; sp < imageBreite; sp++) {
 			cx = xa + sp * dx; // von links nach rechts
@@ -67,7 +66,13 @@ class Mandelbrot { // statische Klasse
 				cy = ye - ze * dy; // von oben nach unten
 				if (iterZahl(cx, cy, maxIt) == maxIt)
 					g.drawLine(sp, ze, sp, ze);
+				
 			}
 		}
+	
+
 	}
 }
+
+
+
