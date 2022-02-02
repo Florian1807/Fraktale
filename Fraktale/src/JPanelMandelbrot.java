@@ -4,32 +4,31 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel; //Importieren
 
+
 public class JPanelMandelbrot extends JFrame { // 
-	public static void main(String[] args) {
-		new JPanelMandelbrot();
-	}
+	
 
 	static int imageBreite = 459;
 	static int imageHoehe = 405;// Höhe und Breite definieren
 	int frameBreite = imageBreite + 30, frameHoehe = imageHoehe + 50;
-	Leinwand malPanel = new Leinwand(imageBreite, imageHoehe);
-	JPanel contentPane;
+	Leinwand malPanel = new Leinwand(imageBreite, imageHoehe);//Erstellen der Zeichenfläche
+	JPanel contentPanel;
 
 	public JPanelMandelbrot() { // Konstruktor
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(frameBreite, frameHoehe);
 		setLocationRelativeTo(null);
 		setTitle("Mandelbrotmenge mit JPanel");
-		contentPane = new JPanel();
-		setContentPane(contentPane);
-		setVisible(true);
-		malPanel.setPreferredSize(new Dimension(imageBreite, imageHoehe));
-		contentPane.add(malPanel);
+		contentPanel = new JPanel();
+		setContentPane(contentPanel);
+		setVisible(true);//Fenster anzeigen lassen
+		malPanel.setPreferredSize(new Dimension(imageBreite, imageHoehe));//Malpanel wird definiert
+		contentPanel.add(malPanel);
 	}
 }
 
 class Leinwand extends JPanel {
-	public Leinwand(int imageBreite, int imageHoehe) {
+	public Leinwand(int imageBreite, int imageHoehe) {//Größe der Zeichenfläche
 		setBackground(Color.white);
 	}
 
@@ -51,10 +50,13 @@ class Mandelbrot { // statische Klasse
 			zx = tmp;
 			zaehler = zaehler + 1;
 		} while (zx * zx + zy * zy <= 4.0 && zaehler < maxIt);
+		if (zaehler == maxIt)
+			 
 		return zaehler;
 	}
 
 	public static void zeichneMandelbrotmenge(Graphics g, int imageBreite, int imageHoehe) {
+		
 		double xa = -2.02, xe = 0.7, ya = -1.2, ye = 1.2; // Ratio 17:15
 		final double dx = (xe - xa) / (imageBreite - 1), dy = (ye - ya) / (imageHoehe - 1);
 		double cx, cy;
@@ -66,13 +68,14 @@ class Mandelbrot { // statische Klasse
 				cy = ye - ze * dy; // von oben nach unten
 				if (iterZahl(cx, cy, maxIt) == maxIt)
 					g.drawLine(sp, ze, sp, ze);
+				zeichnePixel(sp, ze, pixFarbe);
+				else
+				 zeichnePixel(sp, ze, farbFeld[zaehler % farbFeld.length]);
 				
 			}
 		}
-	
-
-	}
-}
+		
+	} }
 
 
 
