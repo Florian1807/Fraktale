@@ -91,6 +91,6 @@ class Mandelbrot { // statische Klasse
 		}
 		
 		}
-
-
+	}
+}
 
