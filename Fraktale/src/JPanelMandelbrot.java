@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel; //Importieren
 
 
+
 public class JPanelMandelbrot extends JFrame { // 
 	
 
@@ -51,13 +52,27 @@ class Mandelbrot { // statische Klasse
 			zaehler = zaehler + 1;
 		} while (zx * zx + zy * zy <= 4.0 && zaehler < maxIt);
 		if (zaehler == maxIt)
-			 
+
 		return zaehler;
+		return maxIt;//Rückgabe
 	}
 
-	public static void zeichneMandelbrotmenge(Graphics g, int imageBreite, int imageHoehe) {
-		
-		double xa = -2.02, xe = 0.7, ya = -1.2, ye = 1.2; // Ratio 17:15
+	public static void zeichneMandelbrotmenge(Graphics g, int imageBreite, int imageHoehe) {//Array farbFeld erstellen und mit Farben befüllen
+		final Color[] farbFeld = { 
+				Color.YELLOW, 
+				Color.RED, 
+				Color.MAGENTA, 
+				Color.CYAN, 
+				Color.LIGHT_GRAY,
+				Color.GREEN, 
+				Color.ORANGE,
+				Color.GRAY, 
+				Color.BLUE, 
+				Color.DARK_GRAY,
+				Color.PINK
+				};
+		int pixFarbe=0;
+		double xa = -2.02, xe = 0.7, ya = -1.2, ye = 1.2;
 		final double dx = (xe - xa) / (imageBreite - 1), dy = (ye - ya) / (imageHoehe - 1);
 		double cx, cy;
 		int maxIt = 20;
@@ -66,16 +81,16 @@ class Mandelbrot { // statische Klasse
 			cx = xa + sp * dx; // von links nach rechts
 			for (int ze = 0; ze < imageHoehe; ze++) {
 				cy = ye - ze * dy; // von oben nach unten
-				if (iterZahl(cx, cy, maxIt) == maxIt)
+				if (iterZahl(cx, cy, maxIt) == maxIt) {
 					g.drawLine(sp, ze, sp, ze);
 				zeichnePixel(sp, ze, pixFarbe);
-				else
+			}else{
 				 zeichnePixel(sp, ze, farbFeld[zaehler % farbFeld.length]);
 				
 			}
 		}
 		
-	} }
+		}
 
 
 
